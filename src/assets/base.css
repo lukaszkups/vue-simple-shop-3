@@ -6,6 +6,7 @@
   --color-blue: #007FFF;
   --color-blue--light: #6CB4EE;
   --shadow: 0px 1px 10px 0px rgba(87, 87, 87, 0.17); 
+  --shadow--hover: 0px 2px 25px 0px rgba(87, 87, 87, 0.17); 
   --content-width: 75vw;
 }
 

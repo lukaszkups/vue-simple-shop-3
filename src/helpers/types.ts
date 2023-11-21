@@ -6,6 +6,13 @@ export interface ProductItem {
   price: string;
 }
 
+export interface ProductListItem {
+  id: number;
+  name: string;
+  price: string;
+  image: string;
+}
+
 export interface CartItem extends ProductItem {
   quantity: number;
 }
