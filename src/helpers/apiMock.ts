@@ -14,6 +14,10 @@ interface GetProductResponse {
 }
 
 class ApiMock {
+  async delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   async getProducts(pageNumber: number): Promise<GetProductsResponse> {
     const items: ProductListItem[] = [];
     let validItemIndex = (perPage * (pageNumber - 1)) - 1;
@@ -28,8 +32,9 @@ class ApiMock {
         validItemIndex++;
       }
     })
+
     // simulate delay
-    await setTimeout(() => ({}), (Math.floor(Math.random() * (5 - 1) + 1) * 1000));
+    await this.delay(3000);
     return await Promise.resolve({
       page: pageNumber,
       items: items,
@@ -39,7 +44,7 @@ class ApiMock {
   async getproduct(productId: number): Promise<GetProductResponse> {
     const item = mockedData.products.find((product) => product.id === productId);
     // simulate delay
-    await setTimeout(() => ({}), (Math.floor(Math.random() * (5 - 1) + 1) * 1000));
+    await this.delay(2000);
     if (item) {
       return Promise.resolve({
         item: item,
