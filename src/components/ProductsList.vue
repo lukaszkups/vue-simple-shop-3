@@ -3,6 +3,7 @@ import { onBeforeMount, reactive } from 'vue';
 import ApiMock from '@/helpers/apiMock';
 import type { ProductListItem as ProductListItemType } from '@/helpers/types';
 import ProductListItem from './ProductListItem.vue';
+import Skeleton from './shared/Skeleton.vue';
 
 interface AppData {
   loading: boolean;
@@ -32,16 +33,39 @@ onBeforeMount(async () => {
 </script>
 <template>
   <div class="view-product-list">
-    <product-list-item 
-      v-for="product in appData.products"
-      :product="product"
-      :key="product.id"
-    />
+    <template v-if="!appData.loading">
+      <product-list-item 
+        v-for="product in appData.products"
+        :product="product"
+        :key="product.id"
+      />
+    </template>
+    <template v-else>
+      <div 
+        v-for="item in [1,2,3]"
+        :key="item"
+        class="product-item-skeleton"
+      >
+        <skeleton height="225px" />
+      </div>
+    </template>
   </div>
 </template>
 <style lang="scss">
 .view-product-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+.product-item-skeleton {
+  flex: 1 0 30%;
+  max-width: 30%;
+  overflow: hidden;
+  margin: 5px;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid var(--color-gray);
+  background: var(--color-white);
+  box-shadow: var(--shadow);
 }
 </style>
