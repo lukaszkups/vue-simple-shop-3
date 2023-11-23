@@ -3,7 +3,7 @@ import { onBeforeMount, reactive } from 'vue';
 import ApiMock from '@/helpers/apiMock';
 import type { ProductListItem as ProductListItemType } from '@/helpers/types';
 import ProductListItem from './ProductListItem.vue';
-import Skeleton from './shared/Skeleton.vue';
+import Skeleton from '@/components/shared/Skeleton.vue';
 
 interface AppData {
   loading: boolean;
