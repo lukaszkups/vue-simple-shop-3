@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue';
 import type { ProductListItem } from '@/helpers/types';
+import router from '@/router';
 
 const props = defineProps({
   product: {
@@ -16,9 +17,16 @@ const altImageTitle = computed(() => {
 const productItemThumbnail = computed(() => {
   return `background-image: url(${props.product.image});`
 })
+
+const goToProductDetails = () => {
+  router.push({ name: 'productDetails', params: { productId: props.product.id } });
+}
 </script>
 <template>
-  <div class="product__list-item">
+  <div 
+    class="product__list-item"
+    @click="goToProductDetails"
+  >
     <div class="product__list-item-image-wrapper">
       <div 
         class="product__list-item-image"

@@ -42,17 +42,24 @@ class ApiMock {
   }
 
   async getproduct(productId: number): Promise<GetProductResponse> {
-    const item = mockedData.products.find((product) => product.id === productId);
-    // simulate delay
-    await this.delay(2000);
-    if (item) {
-      return Promise.resolve({
-        item: item,
-      });
+    if (productId) {
+      const item = mockedData.products.find((product) => product.id === productId);
+      // simulate delay
+      await this.delay(2000);
+      if (item) {
+        return Promise.resolve({
+          item: item,
+        });
+      } else {
+        return Promise.reject({
+          code: 404,
+          message: 'Product not found'
+        });
+      }
     } else {
       return Promise.reject({
-        code: 404,
-        message: 'Product not found'
+        code: 400,
+        message: 'Product Id is missing'
       });
     }
   }
