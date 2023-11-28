@@ -13,7 +13,11 @@ const props = defineProps({
 const productDetails = reactive(null as unknown as Ref<ProductItem>);
 
 const getProductDetails = async (productId: number) => {
-  productDetails.value = DataService.getProduct(productId)?.item || {};
+  try {
+    productDetails.value = await DataService.getProduct(productId)?.item || {};
+  } catch(err) {
+
+  }
 }
 
 onBeforeMount(async () => {
