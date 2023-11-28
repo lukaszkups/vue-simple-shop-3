@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, reactive } from 'vue';
-import ApiMock from '@/helpers/apiMock';
+import DataService from '@/services/dataService';
 import type { ProductListItem as ProductListItemType } from '@/helpers/types';
 import ProductListItem from './ProductListItem.vue';
 import Skeleton from '@/components/shared/Skeleton.vue';
@@ -18,7 +18,7 @@ const appData: AppData = reactive({
 // Methods
 
 const loadProducts = async (page: number = 1) => {
-  const resp = await ApiMock.getProducts(page);
+  const resp = await DataService.getProducts(page);
   appData.products = resp.items;
 }
 
